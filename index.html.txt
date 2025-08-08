@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="ur" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <title>Daily Tools Hub - عوام کے لیے مفت ٹولز</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <!-- Bootstrap فریم ورک سی ایس ایس -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <style>
+    body { background-color:#f8fafc; font-family:'Noto Nastaliq Urdu', sans-serif; }
+    .container { max-width: 1000px; margin-top: 20px; }
+    .card { margin-bottom: 1rem; }
+    label { font-weight: bold; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2 class="mb-4 text-center">🛠 Daily Tools Hub - عوام کے لیے مفت ٹولز</h2>
+
+  <!-- ────────────────────────────── ٹول 1 ────────────────────────────── -->
+  <div class="card p-3">
+    <h5>اردو ⇆ رومن اردو ⇆ انگلش ٹیکسٹ کنورٹر</h5>
+    <textarea id="textInput" rows="4" class="form-control my-2" placeholder="یہاں متن لکھیں..."></textarea>
+    <div class="d-flex gap-2 flex-wrap">
+      <button class="btn btn-primary" onclick="toUpper()">انگلش بڑے حروف</button>
+      <button class="btn btn-secondary" onclick="toLower()">انگلش چھوٹے حروف</button>
+      <button class="btn btn-success" onclick="romanToUrdu()">رومن اردو → اردو</button>
+      <button class="btn btn-warning" onclick="urduToRoman()">اردو → رومن اردو</button>
+      <button class="btn btn-danger" onclick="clearText()">صاف کریں</button>
+    </div>
+    <div id="textResult" class="mt-2 text-success"></div>
+  </div>
+
+  <!-- ────────────────────────────── ٹول 2 ────────────────────────────── -->
+  <div class="card p-3">
+    <h5>کرنسی کنورٹر (PKR ⇆ USD, AED, INR)</h5>
+    <div class="row g-2">
+      <div class="col-md-4">
+        <input type="number" id="amount" class="form-control" placeholder="رقم درج کریں">
+      </div>
+      <div class="col-md-3">
+        <select id="fromCurrency" class="form-select">
+          <option value="PKR">پاکستانی روپیہ (PKR)</option>
+          <option value="USD">امریکی ڈالر (USD)</option>
+          <option value="AED">اماراتی درہم (AED)</option>
+          <option value="INR">بھارتی روپیہ (INR)</option>
+        </select>
+      </div>
+      <div class="col-md-3">
+        <select id="toCurrency" class="form-select">
+          <option value="USD">امریکی ڈالر (USD)</option>
+          <option value="PKR">پاکستانی روپیہ (PKR)</option>
+          <option value="AED">اماراتی درہم (AED)</option>
+          <option value="INR">بھارتی روپیہ (INR)</option>
+        </select>
+      </div>
+      <div class="col-md-2">
+        <button class="btn btn-primary w-100" onclick="convertCurrency()">تبدیل</button>
+      </div>
+    </div>
+    <div id="currencyResult" class="mt-2 text-info"></div>
+  </div>
+
+  <!-- ────────────────────────────── ٹول 3 ────────────────────────────── -->
+  <div class="card p-3">
+    <h5>PDF Merge/Split (سادہ)</h5>
+    <p>📌 نوٹ: یہ فیچر صرف براؤزر بیسڈ PDF مرج یا سپلٹ کے لیے ہے۔ ابھی بیسک ورژن ہے، بعد میں پروفیشنل فیچر شامل کریں گے۔</p>
+    <input type="file" id="pdfFiles" class="form-control my-2" multiple accept="application/pdf">
+    <div class="d-flex gap-2">
+      <button class="btn btn-success" onclick="mergePDFs()">Merge کریں</button>
+      <button class="btn btn-warning" onclick="splitPDF()">Split کریں</button>
+    </div>
+    <div id="pdfResult" class="mt-2 text-danger"></div>
+  </div>
+
+  <!-- ────────────────────────────── فوٹر ────────────────────────────── -->
+  <footer class="text-center text-muted mt-4 mb-3">
+    یہ ویب سائٹ عوامی فائدے کے لیے ہے ❤️ | Developed by [آپ کا نام]
+  </footer>
+</div>
+
+<!-- JS لائبریریز -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  // ─────────────── ٹول 1 کے فنکشنز ───────────────
+  function toUpper(){
+    let text = document.getElementById('textInput').value;
+    document.getElementById('textInput').value = text.toUpperCase();
+    document.getElementById('textResult').innerText = 'متن بڑے حروف میں کر دیا گیا';
+  }
+
+  function toLower(){
+    let text = document.getElementById('textInput').value;
+    document.getElementById('textInput').value = text.toLowerCase();
+    document.getElementById('textResult').innerText = 'متن چھوٹے حروف میں کر دیا گیا';
+  }
+
+  function clearText(){
+    document.getElementById('textInput').value = '';
+    document.getElementById('textResult').innerText = 'متن صاف کر دیا گیا';
+  }
+
+  function romanToUrdu(){
+    // نوٹ: یہ آسان مثال ہے، اصل میں بہتر رومن اردو → اردو کنورٹر الگ ڈیٹا سے بنائیں گے
+    let text = document.getElementById('textInput').value;
+    text = text.replace(/salam/gi, 'سلام').replace(/khuda/gi, 'خدا');
+    document.getElementById('textInput').value = text;
+    document.getElementById('textResult').innerText = 'رومن اردو سے اردو میں تبدیلی مکمل';
+  }
+
+  function urduToRoman(){
+    let text = document.getElementById('textInput').value;
+    text = text.replace(/سلام/gi, 'salam').replace(/خدا/gi, 'khuda');
+    document.getElementById('textInput').value = text;
+    document.getElementById('textResult').innerText = 'اردو سے رومن اردو میں تبدیلی مکمل';
+  }
+
+  // ─────────────── ٹول 2 کرنسی کنورٹر ───────────────
+  const rates = {
+    PKR: { USD: 0.0036, AED: 0.013, INR: 0.30 },
+    USD: { PKR: 278, AED: 3.67, INR: 83 },
+    AED: { PKR: 75.7, USD: 0.27, INR: 22.5 },
+    INR: { PKR: 3.3, USD: 0.012, AED: 0.044 }
+  };
+
+  function convertCurrency(){
+    let amount = parseFloat(document.getElementById('amount').value);
+    let from = document.getElementById('fromCurrency').value;
+    let to = document.getElementById('toCurrency').value;
+    if(isNaN(amount)){
+      document.getElementById('currencyResult').innerText = 'براہ کرم رقم درج کریں';
+      return;
+    }
+    if(from === to){
+      document.getElementById('currencyResult').innerText = 'کرنسی ایک جیسی ہے';
+      return;
+    }
+    let result = amount * rates[from][to];
+    document.getElementById('currencyResult').innerText = amount + ' ' + from + ' = ' + result.toFixed(2) + ' ' + to;
+  }
+
+  // ─────────────── ٹول 3 PDF مرج / سپلٹ ───────────────
+  function mergePDFs(){
+    document.getElementById('pdfResult').innerText = '📌 PDF مرج فنکشن بعد میں ایڈوانس لائبریری سے جوڑیں گے';
+  }
+
+  function splitPDF(){
+    document.getElementById('pdfResult').innerText = '📌 PDF سپلٹ فنکشن بعد میں ایڈوانس لائبریری سے جوڑیں گے';
+  }
+</script>
+
+</body>
+</html>
