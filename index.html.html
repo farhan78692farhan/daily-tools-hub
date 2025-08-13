@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daily Tool Hub - مزید ٹولز</title>
+    <title>Daily Tool Hub - روزمرہ کے مفید ٹولز</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -60,18 +60,6 @@
             margin-top: 10px;
             border-left: 3px solid #2c3e50;
         }
-        nav {
-            background: #34495e;
-            padding: 10px 0;
-        }
-        nav a {
-            color: white;
-            text-decoration: none;
-            padding: 10px 20px;
-        }
-        nav a:hover {
-            background: #2c3e50;
-        }
     </style>
 </head>
 <body>
@@ -82,306 +70,309 @@
         </div>
     </header>
 
-    <nav>
-        <div class="container">
-            <a href="index.html">بنیادی ٹولز</a>
-            <a href="tools.html">مزید ٹولز</a>
-        </div>
-    </nav>
-
     <div class="container">
-        <!-- QR کوڈ جنریٹر -->
+        <!-- لفظ گنتی کا ٹول -->
         <div class="tool-card">
-            <h2>QR کوڈ جنریٹر (QR Code Generator)</h2>
-            <input type="text" id="qrText" placeholder="URL یا ٹیکسٹ درج کریں">
-            <button onclick="generateQR()">QR کوڈ بنائیں</button>
+            <h2>لفظ گنتی (Word Counter)</h2>
+            <textarea id="wordInput" rows="5" placeholder="اپنا ٹیکسٹ یہاں لکھیں..."></textarea>
+            <button onclick="countWords()">الفاظ گنیں</button>
             <div class="result">
-                <div id="qrCode"></div>
-                <button onclick="downloadQR()" id="downloadBtn" style="display:none;">ڈاؤن لوڈ کریں</button>
+                <p>الفاظ: <span id="wordCount">0</span></p>
+                <p>حروف (فاصلے کے بغیر): <span id="charCount">0</span></p>
+                <p>حروف (فاصلے سمیت): <span id="charCountSpaces">0</span></p>
             </div>
         </div>
 
-        <!-- کرنسی کنورٹر -->
+        <!-- کیس کنورٹر -->
         <div class="tool-card">
-            <h2>کرنسی کنورٹر (Currency Converter)</h2>
-            <div>
-                <input type="number" id="currencyAmount" placeholder="رقم" value="1">
-                <select id="currencyFrom">
-                    <option value="USD">امریکی ڈالر (USD)</option>
-                    <option value="EUR">یورو (EUR)</option>
-                    <option value="GBP">برطانوی پاؤنڈ (GBP)</option>
-                    <option value="JPY">جاپانی ین (JPY)</option>
-                    <option value="PKR">پاکستانی روپیہ (PKR)</option>
-                    <option value="SAR">سعودی ریال (SAR)</option>
-                    <option value="AED">متحدہ عرب اماراتی درہم (AED)</option>
-                </select>
-                <span>to</span>
-                <select id="currencyTo">
-                    <option value="PKR">پاکستانی روپیہ (PKR)</option>
-                    <option value="USD">امریکی ڈالر (USD)</option>
-                    <option value="EUR">یورو (EUR)</option>
-                    <option value="GBP">برطانوی پاؤنڈ (GBP)</option>
-                    <option value="JPY">جاپانی ین (JPY)</option>
-                    <option value="SAR">سعودی ریال (SAR)</option>
-                    <option value="AED">متحدہ عرب اماراتی درہم (AED)</option>
-                </select>
-                <button onclick="convertCurrency()">تبدیل کریں</button>
-            </div>
-            <div class="result">
-                <p>نتیجہ: <span id="currencyResult">0</span></p>
-                <p id="currencyDate" style="font-size: 0.8em; color: #666;"></p>
-            </div>
-        </div>
-
-        <!-- بیس64 انکوڈر/ڈیکوڈر -->
-        <div class="tool-card">
-            <h2>بیس64 انکوڈر/ڈیکوڈر (Base64 Encoder/Decoder)</h2>
-            <textarea id="base64Input" rows="3" placeholder="ٹیکسٹ درج کریں"></textarea>
-            <button onclick="encodeBase64()">انکوڈ کریں</button>
-            <button onclick="decodeBase64()">ڈیکوڈ کریں</button>
+            <h2>کیس کنورٹر (Case Converter)</h2>
+            <textarea id="caseInput" rows="3" placeholder="تبدیل کرنے کے لیے ٹیکسٹ"></textarea>
+            <button onclick="convertToUpper()">بڑے حروف (UPPERCASE)</button>
+            <button onclick="convertToLower()">چھوٹے حروف (lowercase)</button>
+            <button onclick="convertToTitle()">عنوان کیس (Title Case)</button>
             <div class="result">
                 <p>نتیجہ:</p>
-                <textarea id="base64Output" rows="3" readonly></textarea>
-                <button onclick="copyBase64()">کاپی کریں</button>
+                <div id="caseOutput" style="padding: 8px; background: white; border: 1px solid #ddd;"></div>
             </div>
         </div>
 
-        <!-- ایم ڈی5 جنریٹر -->
+        <!-- پاسورڈ جنریٹر -->
         <div class="tool-card">
-            <h2>ایم ڈی5 جنریٹر (MD5 Generator)</h2>
-            <textarea id="md5Input" rows="3" placeholder="ٹیکسٹ درج کریں"></textarea>
-            <button onclick="generateMD5()">ایم ڈی5 بنائیں</button>
+            <h2>پاسورڈ جنریٹر (Password Generator)</h2>
+            <label for="pwLength">پاسورڈ کی لمبائی:</label>
+            <input type="number" id="pwLength" min="6" max="32" value="12">
+            <label>
+                <input type="checkbox" id="useUpper" checked> بڑے حروف (A-Z)
+            </label>
+            <label>
+                <input type="checkbox" id="useLower" checked> چھوٹے حروف (a-z)
+            </label>
+            <label>
+                <input type="checkbox" id="useNumbers" checked> نمبرز (0-9)
+            </label>
+            <label>
+                <input type="checkbox" id="useSymbols" checked> علامات (!@#$%^&*)
+            </label>
+            <button onclick="generatePassword()">پاسورڈ بنائیں</button>
             <div class="result">
-                <p>ایم ڈی5 ہیش:</p>
-                <input type="text" id="md5Output" readonly>
-                <button onclick="copyMD5()">کاپی کریں</button>
+                <p>آپ کا پاسورڈ:</p>
+                <input type="text" id="passwordOutput" readonly>
+                <button onclick="copyPassword()">کاپی کریں</button>
             </div>
         </div>
 
-        <!-- ٹو ڈو لسٹ -->
+        <!-- یونٹ کنورٹر -->
         <div class="tool-card">
-            <h2>ٹو ڈو لسٹ (Todo List)</h2>
+            <h2>یونٹ کنورٹر (Unit Converter)</h2>
             <div>
-                <input type="text" id="todoInput" placeholder="نیا کام درج کریں">
-                <button onclick="addTodo()">شامل کریں</button>
+                <select id="unitType">
+                    <option value="length">لمبائی</option>
+                    <option value="weight">وزن</option>
+                    <option value="temperature">درجہ حرارت</option>
+                    <option value="area">رقبہ</option>
+                </select>
+                
+                <input type="number" id="unitValue" placeholder="قدر">
+                
+                <select id="unitFrom"></select>
+                <span>to</span>
+                <select id="unitTo"></select>
+                
+                <button onclick="convertUnits()">تبدیل کریں</button>
             </div>
             <div class="result">
-                <ul id="todoList"></ul>
+                <p>نتیجہ: <span id="unitResult">0</span></p>
             </div>
         </div>
 
-        <!-- رینڈم نمبر جنریٹر -->
+        <!-- ٹائم اینڈ ڈیٹ کیلکولیٹر -->
         <div class="tool-card">
-            <h2>رینڈم نمبر جنریٹر (Random Number Generator)</h2>
+            <h2>ٹائم اینڈ ڈیٹ کیلکولیٹر (Time & Date Calculator)</h2>
             <div>
-                <label>کم از کم:</label>
-                <input type="number" id="randomMin" value="1">
-                <label>زیادہ سے زیادہ:</label>
-                <input type="number" id="randomMax" value="100">
-                <label>تعداد:</label>
-                <input type="number" id="randomCount" value="1" min="1" max="10">
-                <button onclick="generateRandom()">نمبر بنائیں</button>
+                <label>پہلی تاریخ:</label>
+                <input type="date" id="date1">
+                <label>دوسری تاریخ:</label>
+                <input type="date" id="date2">
+                <button onclick="calculateDateDiff()">فرق نکالیں</button>
             </div>
             <div class="result">
-                <p>نتیجہ: <span id="randomResult"></span></p>
+                <p>نتیجہ: <span id="dateResult"></span></p>
             </div>
         </div>
     </div>
 
     <script>
-        // QR کوڈ جنریٹر فنکشنز
-        function generateQR() {
-            const text = document.getElementById('qrText').value;
-            if (!text) {
-                alert('براہ کرم کوئی ٹیکسٹ یا URL درج کریں');
+        // لفظ گنتی کا فنکشن
+        function countWords() {
+            const text = document.getElementById('wordInput').value;
+            const words = text.trim() === '' ? 0 : text.trim().split(/\s+/).length;
+            const chars = text.replace(/\s+/g, '').length;
+            const charsWithSpaces = text.length;
+            
+            document.getElementById('wordCount').textContent = words;
+            document.getElementById('charCount').textContent = chars;
+            document.getElementById('charCountSpaces').textContent = charsWithSpaces;
+        }
+
+        // کیس کنورٹر فنکشنز
+        function convertToUpper() {
+            const text = document.getElementById('caseInput').value;
+            document.getElementById('caseOutput').textContent = text.toUpperCase();
+        }
+        
+        function convertToLower() {
+            const text = document.getElementById('caseInput').value;
+            document.getElementById('caseOutput').textContent = text.toLowerCase();
+        }
+        
+        function convertToTitle() {
+            const text = document.getElementById('caseInput').value;
+            document.getElementById('caseOutput').textContent = text.replace(/\w\S*/g, function(txt) {
+                return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+            });
+        }
+
+        // پاسورڈ جنریٹر فنکشنز
+        function generatePassword() {
+            const length = document.getElementById('pwLength').value;
+            const useUpper = document.getElementById('useUpper').checked;
+            const useLower = document.getElementById('useLower').checked;
+            const useNumbers = document.getElementById('useNumbers').checked;
+            const useSymbols = document.getElementById('useSymbols').checked;
+            
+            let chars = '';
+            if (useUpper) chars += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            if (useLower) chars += 'abcdefghijklmnopqrstuvwxyz';
+            if (useNumbers) chars += '0123456789';
+            if (useSymbols) chars += '!@#$%^&*()_+~`|}{[]:;?><,./-=';
+            
+            if (!chars) {
+                alert('کم از کم ایک اختیار منتخب کریں');
                 return;
             }
             
-            const qrCodeDiv = document.getElementById('qrCode');
-            qrCodeDiv.innerHTML = '';
-            
-            // Using a simple QR code API (you might want to use a library for offline use)
-            const qrImg = document.createElement('img');
-            qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(text)}`;
-            qrImg.alt = 'QR Code';
-            
-            qrCodeDiv.appendChild(qrImg);
-            document.getElementById('downloadBtn').style.display = 'inline-block';
-        }
-        
-        function downloadQR() {
-            const qrImg = document.querySelector('#qrCode img');
-            if (!qrImg) return;
-            
-            const link = document.createElement('a');
-            link.href = qrImg.src;
-            link.download = 'qrcode.png';
-            link.click();
-        }
-
-        // کرنسی کنورٹر فنکشنز
-        async function convertCurrency() {
-            const from = document.getElementById('currencyFrom').value;
-            const to = document.getElementById('currencyTo').value;
-            const amount = document.getElementById('currencyAmount').value;
-            
-            if (from === to) {
-                document.getElementById('currencyResult').textContent = amount;
-                return;
+            let password = '';
+            for (let i = 0; i < length; i++) {
+                password += chars.charAt(Math.floor(Math.random() * chars.length));
             }
             
-            try {
-                // Note: For a real application, you should use a proper API with an API key
-                // This is a simplified example that might not work due to CORS restrictions
-                const response = await fetch(`https://api.exchangerate-api.com/v4/latest/${from}`);
-                const data = await response.json();
-                
-                if (data && data.rates && data.rates[to]) {
-                    const rate = data.rates[to];
-                    const result = (amount * rate).toFixed(2);
-                    document.getElementById('currencyResult').textContent = result;
-                    document.getElementById('currencyDate').textContent = `تازہ ترین شرح: ${new Date(data.date).toLocaleDateString()}`;
-                } else {
-                    throw new Error('Invalid response');
-                }
-            } catch (error) {
-                console.error('Error fetching exchange rates:', error);
-                // Fallback rates (for demo purposes only)
-                const fallbackRates = {
-                    USD: { PKR: 278.50, EUR: 0.85, GBP: 0.73, JPY: 110.25, SAR: 3.75, AED: 3.67 },
-                    EUR: { USD: 1.18, PKR: 328.75, GBP: 0.86, JPY: 130.50, SAR: 4.42, AED: 4.33 },
-                    GBP: { USD: 1.37, EUR: 1.16, PKR: 381.20, JPY: 151.75, SAR: 5.14, AED: 5.03 },
-                    PKR: { USD: 0.0036, EUR: 0.0030, GBP: 0.0026, JPY: 0.40, SAR: 0.013, AED: 0.013 },
-                    SAR: { USD: 0.27, EUR: 0.23, GBP: 0.19, PKR: 74.33, JPY: 29.40, AED: 0.98 },
-                    AED: { USD: 0.27, EUR: 0.23, GBP: 0.20, PKR: 75.85, JPY: 30.05, SAR: 1.02 }
-                };
-                
-                if (fallbackRates[from] && fallbackRates[from][to]) {
-                    const rate = fallbackRates[from][to];
-                    const result = (amount * rate).toFixed(2);
-                    document.getElementById('currencyResult').textContent = result + ' (تازہ ترین ڈیٹا دستیاب نہیں، پرانا ڈیٹا استعمال کیا گیا)';
-                    document.getElementById('currencyDate').textContent = '';
-                } else {
-                    document.getElementById('currencyResult').textContent = 'تبادلہ شرح دستیاب نہیں';
-                    document.getElementById('currencyDate').textContent = '';
-                }
-            }
-        }
-
-        // بیس64 انکوڈر/ڈیکوڈر فنکشنز
-        function encodeBase64() {
-            const text = document.getElementById('base64Input').value;
-            document.getElementById('base64Output').value = btoa(unescape(encodeURIComponent(text)));
+            document.getElementById('passwordOutput').value = password;
         }
         
-        function decodeBase64() {
-            const text = document.getElementById('base64Input').value;
-            try {
-                document.getElementById('base64Output').value = decodeURIComponent(escape(atob(text)));
-            } catch (e) {
-                document.getElementById('base64Output').value = 'غلط فارمیٹ! صرف درست بیس64 ٹیکسٹ ڈیکوڈ کیا جا سکتا ہے';
-            }
-        }
-        
-        function copyBase64() {
-            const output = document.getElementById('base64Output');
-            output.select();
+        function copyPassword() {
+            const passwordField = document.getElementById('passwordOutput');
+            passwordField.select();
             document.execCommand('copy');
-            alert('کاپی ہو گیا!');
+            alert('پاسورڈ کاپی ہو گیا!');
         }
 
-        // ایم ڈی5 جنریٹر فنکشنز
-        function generateMD5() {
-            const text = document.getElementById('md5Input').value;
-            if (!text) {
-                alert('براہ کرم کوئی ٹیکسٹ درج کریں');
+        // یونٹ کنورٹر فنکشنز
+        const units = {
+            length: {
+                meter: 1,
+                centimeter: 0.01,
+                millimeter: 0.001,
+                kilometer: 1000,
+                inch: 0.0254,
+                foot: 0.3048,
+                yard: 0.9144,
+                mile: 1609.34
+            },
+            weight: {
+                kilogram: 1,
+                gram: 0.001,
+                milligram: 0.000001,
+                pound: 0.453592,
+                ounce: 0.0283495,
+                ton: 1000
+            },
+            temperature: {
+                celsius: 'celsius',
+                fahrenheit: 'fahrenheit',
+                kelvin: 'kelvin'
+            },
+            area: {
+                squareMeter: 1,
+                squareKilometer: 1000000,
+                squareMile: 2589988.11,
+                squareYard: 0.836127,
+                squareFoot: 0.092903,
+                squareInch: 0.00064516,
+                acre: 4046.86,
+                hectare: 10000
+            }
+        };
+
+        function populateUnitDropdowns() {
+            const unitType = document.getElementById('unitType').value;
+            const unitFrom = document.getElementById('unitFrom');
+            const unitTo = document.getElementById('unitTo');
+            
+            // Clear existing options
+            unitFrom.innerHTML = '';
+            unitTo.innerHTML = '';
+            
+            // Add new options
+            for (const unit in units[unitType]) {
+                const option1 = document.createElement('option');
+                option1.value = unit;
+                option1.textContent = unit;
+                
+                const option2 = document.createElement('option');
+                option2.value = unit;
+                option2.textContent = unit;
+                
+                unitFrom.appendChild(option1);
+                unitTo.appendChild(option2);
+            }
+            
+            // Set default 'to' unit different from 'from'
+            if (unitTo.options.length > 1) {
+                unitTo.selectedIndex = 1;
+            }
+        }
+
+        function convertUnits() {
+            const unitType = document.getElementById('unitType').value;
+            const fromUnit = document.getElementById('unitFrom').value;
+            const toUnit = document.getElementById('unitTo').value;
+            const value = parseFloat(document.getElementById('unitValue').value);
+            
+            if (isNaN(value)) {
+                alert('براہ کرم ایک درست عدد درج کریں');
                 return;
             }
             
-            // Simple MD5 implementation (for demo purposes)
-            // Note: For production, use a proper library like crypto-js
-            document.getElementById('md5Output').value = simpleMD5(text);
-        }
-        
-        function simpleMD5(input) {
-            // This is a very simplified version for demonstration
-            // A real MD5 algorithm is much more complex
-            let hash = 0;
-            for (let i = 0; i < input.length; i++) {
-                const char = input.charCodeAt(i);
-                hash = (hash << 5) - hash + char;
-                hash |= 0; // Convert to 32bit integer
+            let result;
+            
+            if (unitType === 'temperature') {
+                // Temperature conversion
+                result = convertTemperature(value, fromUnit, toUnit);
+            } else {
+                // Other units conversion
+                const fromValue = units[unitType][fromUnit];
+                const toValue = units[unitType][toUnit];
+                result = (value * fromValue) / toValue;
             }
-            return (hash >>> 0).toString(16); // Convert to unsigned and then to hex
-        }
-        
-        function copyMD5() {
-            const output = document.getElementById('md5Output');
-            output.select();
-            document.execCommand('copy');
-            alert('کاپی ہو گیا!');
+            
+            document.getElementById('unitResult').textContent = result.toFixed(4);
         }
 
-        // ٹو ڈو لسٹ فنکشنز
-        function addTodo() {
-            const input = document.getElementById('todoInput');
-            const task = input.value.trim();
+        function convertTemperature(value, fromUnit, toUnit) {
+            if (fromUnit === toUnit) return value;
             
-            if (!task) return;
+            // Convert to Celsius first
+            let celsius;
+            switch (fromUnit) {
+                case 'celsius':
+                    celsius = value;
+                    break;
+                case 'fahrenheit':
+                    celsius = (value - 32) * 5/9;
+                    break;
+                case 'kelvin':
+                    celsius = value - 273.15;
+                    break;
+            }
             
-            const todoList = document.getElementById('todoList');
-            const li = document.createElement('li');
-            
-            const checkbox = document.createElement('input');
-            checkbox.type = 'checkbox';
-            checkbox.onchange = function() {
-                if (this.checked) {
-                    taskSpan.style.textDecoration = 'line-through';
-                    taskSpan.style.color = '#999';
-                } else {
-                    taskSpan.style.textDecoration = 'none';
-                    taskSpan.style.color = '#333';
-                }
-            };
-            
-            const taskSpan = document.createElement('span');
-            taskSpan.textContent = task;
-            taskSpan.style.marginLeft = '10px';
-            
-            const deleteBtn = document.createElement('button');
-            deleteBtn.textContent = 'حذف کریں';
-            deleteBtn.style.marginLeft = '10px';
-            deleteBtn.style.padding = '2px 5px';
-            deleteBtn.style.fontSize = '0.8em';
-            deleteBtn.onclick = function() {
-                li.remove();
-            };
-            
-            li.appendChild(checkbox);
-            li.appendChild(taskSpan);
-            li.appendChild(deleteBtn);
-            todoList.appendChild(li);
-            
-            input.value = '';
+            // Convert from Celsius to target unit
+            switch (toUnit) {
+                case 'celsius':
+                    return celsius;
+                case 'fahrenheit':
+                    return (celsius * 9/5) + 32;
+                case 'kelvin':
+                    return celsius + 273.15;
+            }
         }
 
-        // رینڈم نمبر جنریٹر فنکشنز
-        function generateRandom() {
-            const min = parseInt(document.getElementById('randomMin').value) || 0;
-            const max = parseInt(document.getElementById('randomMax').value) || 100;
-            const count = parseInt(document.getElementById('randomCount').value) || 1;
+        // Initialize unit dropdowns
+        populateUnitDropdowns();
+        document.getElementById('unitType').addEventListener('change', populateUnitDropdowns);
+
+        // ٹائم اینڈ ڈیٹ کیلکولیٹر فنکشنز
+        function calculateDateDiff() {
+            const date1 = new Date(document.getElementById('date1').value);
+            const date2 = new Date(document.getElementById('date2').value);
             
-            if (min >= max) {
-                alert('زیادہ سے زیادہ قیمت کم از کم قیمت سے زیادہ ہونی چاہیے');
+            if (isNaN(date1.getTime()) || isNaN(date2.getTime())) {
+                alert('براہ کرم دونوں تاریخیں درج کریں');
                 return;
             }
             
-            let numbers = [];
-            for (let i = 0; i < count; i++) {
-                numbers.push(Math.floor(Math.random() * (max - min + 1)) + min);
+            const diffTime = Math.abs(date2 - date1);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            
+            let result = `${diffDays} دن`;
+            
+            const diffYears = date2.getFullYear() - date1.getFullYear();
+            const diffMonths = (diffYears * 12) + (date2.getMonth() - date1.getMonth());
+            
+            if (diffMonths > 0) {
+                result += ` (${diffMonths} مہینے)`;
             }
             
-            document.getElementById('randomResult').textContent = numbers.join(', ');
+            document.getElementById('dateResult').textContent = result;
         }
     </script>
 </body>
