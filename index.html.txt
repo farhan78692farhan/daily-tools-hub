@@ -1,52 +1,379 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ur" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to My GitHub Page</title>
+    <title>Daily Tool Hub - روزمرہ کے مفید ٹولز</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background: linear-gradient(135deg, #4CAF50, #2196F3);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        .container {
+            width: 90%;
+            margin: auto;
+            overflow: hidden;
+        }
+        header {
+            background: #2c3e50;
             color: white;
-            padding: 50px;
+            padding: 20px 0;
+            text-align: center;
         }
-        h1 {
-            font-size: 3em;
-            margin-bottom: 10px;
-        }
-        p {
-            font-size: 1.2em;
-        }
-        .box {
-            background: rgba(255,255,255,0.2);
+        .tool-card {
+            background: white;
+            margin: 20px 0;
             padding: 20px;
-            border-radius: 15px;
-            display: inline-block;
-            margin-top: 20px;
-        }
-        a {
-            display: inline-block;
-            margin-top: 20px;
-            background: yellow;
-            padding: 10px 20px;
             border-radius: 5px;
-            color: black;
-            text-decoration: none;
-            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
-        a:hover {
-            background: orange;
+        h2 {
+            color: #2c3e50;
+            border-bottom: 2px solid #f5f5f5;
+            padding-bottom: 10px;
+        }
+        button {
+            background: #2c3e50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+        button:hover {
+            background: #1a252f;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+        }
+        .result {
+            background: #f9f9f9;
+            padding: 10px;
+            margin-top: 10px;
+            border-left: 3px solid #2c3e50;
         }
     </style>
 </head>
 <body>
-    <h1>🌟 Welcome! 🌟</h1>
-    <div class="box">
-        <p>This is my first GitHub Pages website!</p>
-        <p>Created with ❤️ using HTML & CSS</p>
-        <a href="https://github.com/farhan78692farhan" target="_blank">Visit My GitHub</a>
+    <header>
+        <div class="container">
+            <h1>Daily Tool Hub</h1>
+            <p>روزمرہ استعمال کے مفید ٹولز</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- لفظ گنتی کا ٹول -->
+        <div class="tool-card">
+            <h2>لفظ گنتی (Word Counter)</h2>
+            <textarea id="wordInput" rows="5" placeholder="اپنا ٹیکسٹ یہاں لکھیں..."></textarea>
+            <button onclick="countWords()">الفاظ گنیں</button>
+            <div class="result">
+                <p>الفاظ: <span id="wordCount">0</span></p>
+                <p>حروف (فاصلے کے بغیر): <span id="charCount">0</span></p>
+                <p>حروف (فاصلے سمیت): <span id="charCountSpaces">0</span></p>
+            </div>
+        </div>
+
+        <!-- کیس کنورٹر -->
+        <div class="tool-card">
+            <h2>کیس کنورٹر (Case Converter)</h2>
+            <textarea id="caseInput" rows="3" placeholder="تبدیل کرنے کے لیے ٹیکسٹ"></textarea>
+            <button onclick="convertToUpper()">بڑے حروف (UPPERCASE)</button>
+            <button onclick="convertToLower()">چھوٹے حروف (lowercase)</button>
+            <button onclick="convertToTitle()">عنوان کیس (Title Case)</button>
+            <div class="result">
+                <p>نتیجہ:</p>
+                <div id="caseOutput" style="padding: 8px; background: white; border: 1px solid #ddd;"></div>
+            </div>
+        </div>
+
+        <!-- پاسورڈ جنریٹر -->
+        <div class="tool-card">
+            <h2>پاسورڈ جنریٹر (Password Generator)</h2>
+            <label for="pwLength">پاسورڈ کی لمبائی:</label>
+            <input type="number" id="pwLength" min="6" max="32" value="12">
+            <label>
+                <input type="checkbox" id="useUpper" checked> بڑے حروف (A-Z)
+            </label>
+            <label>
+                <input type="checkbox" id="useLower" checked> چھوٹے حروف (a-z)
+            </label>
+            <label>
+                <input type="checkbox" id="useNumbers" checked> نمبرز (0-9)
+            </label>
+            <label>
+                <input type="checkbox" id="useSymbols" checked> علامات (!@#$%^&*)
+            </label>
+            <button onclick="generatePassword()">پاسورڈ بنائیں</button>
+            <div class="result">
+                <p>آپ کا پاسورڈ:</p>
+                <input type="text" id="passwordOutput" readonly>
+                <button onclick="copyPassword()">کاپی کریں</button>
+            </div>
+        </div>
+
+        <!-- یونٹ کنورٹر -->
+        <div class="tool-card">
+            <h2>یونٹ کنورٹر (Unit Converter)</h2>
+            <div>
+                <select id="unitType">
+                    <option value="length">لمبائی</option>
+                    <option value="weight">وزن</option>
+                    <option value="temperature">درجہ حرارت</option>
+                    <option value="area">رقبہ</option>
+                </select>
+                
+                <input type="number" id="unitValue" placeholder="قدر">
+                
+                <select id="unitFrom"></select>
+                <span>to</span>
+                <select id="unitTo"></select>
+                
+                <button onclick="convertUnits()">تبدیل کریں</button>
+            </div>
+            <div class="result">
+                <p>نتیجہ: <span id="unitResult">0</span></p>
+            </div>
+        </div>
+
+        <!-- ٹائم اینڈ ڈیٹ کیلکولیٹر -->
+        <div class="tool-card">
+            <h2>ٹائم اینڈ ڈیٹ کیلکولیٹر (Time & Date Calculator)</h2>
+            <div>
+                <label>پہلی تاریخ:</label>
+                <input type="date" id="date1">
+                <label>دوسری تاریخ:</label>
+                <input type="date" id="date2">
+                <button onclick="calculateDateDiff()">فرق نکالیں</button>
+            </div>
+            <div class="result">
+                <p>نتیجہ: <span id="dateResult"></span></p>
+            </div>
+        </div>
     </div>
+
+    <script>
+        // لفظ گنتی کا فنکشن
+        function countWords() {
+            const text = document.getElementById('wordInput').value;
+            const words = text.trim() === '' ? 0 : text.trim().split(/\s+/).length;
+            const chars = text.replace(/\s+/g, '').length;
+            const charsWithSpaces = text.length;
+            
+            document.getElementById('wordCount').textContent = words;
+            document.getElementById('charCount').textContent = chars;
+            document.getElementById('charCountSpaces').textContent = charsWithSpaces;
+        }
+
+        // کیس کنورٹر فنکشنز
+        function convertToUpper() {
+            const text = document.getElementById('caseInput').value;
+            document.getElementById('caseOutput').textContent = text.toUpperCase();
+        }
+        
+        function convertToLower() {
+            const text = document.getElementById('caseInput').value;
+            document.getElementById('caseOutput').textContent = text.toLowerCase();
+        }
+        
+        function convertToTitle() {
+            const text = document.getElementById('caseInput').value;
+            document.getElementById('caseOutput').textContent = text.replace(/\w\S*/g, function(txt) {
+                return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+            });
+        }
+
+        // پاسورڈ جنریٹر فنکشنز
+        function generatePassword() {
+            const length = document.getElementById('pwLength').value;
+            const useUpper = document.getElementById('useUpper').checked;
+            const useLower = document.getElementById('useLower').checked;
+            const useNumbers = document.getElementById('useNumbers').checked;
+            const useSymbols = document.getElementById('useSymbols').checked;
+            
+            let chars = '';
+            if (useUpper) chars += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            if (useLower) chars += 'abcdefghijklmnopqrstuvwxyz';
+            if (useNumbers) chars += '0123456789';
+            if (useSymbols) chars += '!@#$%^&*()_+~`|}{[]:;?><,./-=';
+            
+            if (!chars) {
+                alert('کم از کم ایک اختیار منتخب کریں');
+                return;
+            }
+            
+            let password = '';
+            for (let i = 0; i < length; i++) {
+                password += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            
+            document.getElementById('passwordOutput').value = password;
+        }
+        
+        function copyPassword() {
+            const passwordField = document.getElementById('passwordOutput');
+            passwordField.select();
+            document.execCommand('copy');
+            alert('پاسورڈ کاپی ہو گیا!');
+        }
+
+        // یونٹ کنورٹر فنکشنز
+        const units = {
+            length: {
+                meter: 1,
+                centimeter: 0.01,
+                millimeter: 0.001,
+                kilometer: 1000,
+                inch: 0.0254,
+                foot: 0.3048,
+                yard: 0.9144,
+                mile: 1609.34
+            },
+            weight: {
+                kilogram: 1,
+                gram: 0.001,
+                milligram: 0.000001,
+                pound: 0.453592,
+                ounce: 0.0283495,
+                ton: 1000
+            },
+            temperature: {
+                celsius: 'celsius',
+                fahrenheit: 'fahrenheit',
+                kelvin: 'kelvin'
+            },
+            area: {
+                squareMeter: 1,
+                squareKilometer: 1000000,
+                squareMile: 2589988.11,
+                squareYard: 0.836127,
+                squareFoot: 0.092903,
+                squareInch: 0.00064516,
+                acre: 4046.86,
+                hectare: 10000
+            }
+        };
+
+        function populateUnitDropdowns() {
+            const unitType = document.getElementById('unitType').value;
+            const unitFrom = document.getElementById('unitFrom');
+            const unitTo = document.getElementById('unitTo');
+            
+            // Clear existing options
+            unitFrom.innerHTML = '';
+            unitTo.innerHTML = '';
+            
+            // Add new options
+            for (const unit in units[unitType]) {
+                const option1 = document.createElement('option');
+                option1.value = unit;
+                option1.textContent = unit;
+                
+                const option2 = document.createElement('option');
+                option2.value = unit;
+                option2.textContent = unit;
+                
+                unitFrom.appendChild(option1);
+                unitTo.appendChild(option2);
+            }
+            
+            // Set default 'to' unit different from 'from'
+            if (unitTo.options.length > 1) {
+                unitTo.selectedIndex = 1;
+            }
+        }
+
+        function convertUnits() {
+            const unitType = document.getElementById('unitType').value;
+            const fromUnit = document.getElementById('unitFrom').value;
+            const toUnit = document.getElementById('unitTo').value;
+            const value = parseFloat(document.getElementById('unitValue').value);
+            
+            if (isNaN(value)) {
+                alert('براہ کرم ایک درست عدد درج کریں');
+                return;
+            }
+            
+            let result;
+            
+            if (unitType === 'temperature') {
+                // Temperature conversion
+                result = convertTemperature(value, fromUnit, toUnit);
+            } else {
+                // Other units conversion
+                const fromValue = units[unitType][fromUnit];
+                const toValue = units[unitType][toUnit];
+                result = (value * fromValue) / toValue;
+            }
+            
+            document.getElementById('unitResult').textContent = result.toFixed(4);
+        }
+
+        function convertTemperature(value, fromUnit, toUnit) {
+            if (fromUnit === toUnit) return value;
+            
+            // Convert to Celsius first
+            let celsius;
+            switch (fromUnit) {
+                case 'celsius':
+                    celsius = value;
+                    break;
+                case 'fahrenheit':
+                    celsius = (value - 32) * 5/9;
+                    break;
+                case 'kelvin':
+                    celsius = value - 273.15;
+                    break;
+            }
+            
+            // Convert from Celsius to target unit
+            switch (toUnit) {
+                case 'celsius':
+                    return celsius;
+                case 'fahrenheit':
+                    return (celsius * 9/5) + 32;
+                case 'kelvin':
+                    return celsius + 273.15;
+            }
+        }
+
+        // Initialize unit dropdowns
+        populateUnitDropdowns();
+        document.getElementById('unitType').addEventListener('change', populateUnitDropdowns);
+
+        // ٹائم اینڈ ڈیٹ کیلکولیٹر فنکشنز
+        function calculateDateDiff() {
+            const date1 = new Date(document.getElementById('date1').value);
+            const date2 = new Date(document.getElementById('date2').value);
+            
+            if (isNaN(date1.getTime()) || isNaN(date2.getTime())) {
+                alert('براہ کرم دونوں تاریخیں درج کریں');
+                return;
+            }
+            
+            const diffTime = Math.abs(date2 - date1);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            
+            let result = `${diffDays} دن`;
+            
+            const diffYears = date2.getFullYear() - date1.getFullYear();
+            const diffMonths = (diffYears * 12) + (date2.getMonth() - date1.getMonth());
+            
+            if (diffMonths > 0) {
+                result += ` (${diffMonths} مہینے)`;
+            }
+            
+            document.getElementById('dateResult').textContent = result;
+        }
+    </script>
 </body>
 </html>
